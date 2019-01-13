@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+    <title>Events</title>
+    <!-- CSS  -->
+    <link href="./Events_files/icon" rel="stylesheet">
+    <link rel="stylesheet" href="./Events_files/materialize.min.css">
+    <!-- <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+    <style>
+        /* Custom Stylesheet */
+
+        .icon-block {
+            padding: 0 15px;
+        }
+
+        .icon-block .material-icons {
+            font-size: inherit;
+        }
+        </style>
+</head>
+
+<body cz-shortcut-listen="true">
+    <nav class="black lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" 
+                class="brand-logo" style="font-size:1.6em !important; color: white;"><strong>Lets-Do</strong></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="http://api-lets-do.issuetrackerpro.com/index.html">API Docs</a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
+                <li><a href="http://api-lets-do.issuetrackerpro.com/index.html">API Docs</a></li>
+            </ul>
+            <a href="http://api-lets-do.issuetrackerpro.com/index.html" data-activates="nav-mobile" class="button-collapse"><i
+                    class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    <div class="section no-pad-bot" style="margin-bottom: 0px" id="index-banner">
+        <div class="container" style="width: 80%">
+            <p style="font-size: 2em; font-weight: 540; text-align: center">Events documentation</p>
+            <div class="row">
+
+                <div class="col hide-on-small-only m3 l2">
+                    <ul class="section table-of-contents" style="position: fixed;overflow-y: scroll;height: 50vh;">
+                        <li><a href="#listen" style="color: #03a9f4; font-size: 1.2em; font-weight: bold">Listen</a></li>
+                        <li><a href="#verifyUser" class="active">verifyUser</a></li>
+                        <li><a href="#usersList">online-user-list</a></li>
+                        <li><a href="#userId">userId</a></li>
+                        <li><a href="#disconnect-listen">disconnect</a></li>
+                        <li><a href="#authError">auth-error</a></li>
+                        <li><a href="#emit" style="color: #03a9f4; font-size: 1.2em; font-weight: bold">Emit</a></li>
+                        <li><a href="#set-user">set-user</a></li>
+                        <li><a href="#notify-updates">notification</a></li>
+                        <li><a href="#disconnect-emit">disconnect</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col s12 m9 l10">
+
+                    <div id="listen" class="section scrollspy"></div>
+                    <h4>Events to listen</h4>
+
+                    <div id="verifyUser" class="section scrollspy">
+                        <h5>verifyUser event</h5>
+                        This event <span style="font-weight: 600">("verifyUser")</span> has to be listened on the
+                        user's end to verify user authentication.<br>
+                        user will only be set as online user after verification of authentication token.<br>
+                    </div>
+                    <div id="usersList" class="section scrollspy">
+                        <h5>online-user-list event</h5>
+                        This event <span style="font-weight: 600">("online-user-list")</span> has to be listened on the
+                        admin's end to identify all available users that are currently online.<br>
+                        All available users can be shown to the admin ,so that if he/she create/update/delete meeting
+                        with user User will get message .<br>
+                        The output will be an object, object has key as userId and value as full name.
+                    </div>
+                    <div id="userId" class="section scrollspy">
+                        <h5>userId event</h5>
+                        <span><b>This event's name is actually dynamic and refers to the userId of the logged in user.</b></span><br>
+                        This event <span style="font-weight: 600">("userId")</span> has to be listened to get the
+                        updates from another user.<br>
+                        Example output it as follows:<br>
+                        <pre>                            {
+                                    userId: 'unique id of User',
+                                    message: 'message from user',
+                                }
+                            </pre>
+                    </div>
+
+                    <div id="disconnect-listen" class="section scrollspy">
+                        <h5>disconnect event (optional)</h5>
+                        This event <span style="font-weight: 600">("disconnect")</span> has to be listened, when the
+                        user is disconnected to show proper message.<br>
+                    </div>
+
+                    <div id="authError" class="section scrollspy">
+                        <h5>Auth Error (optional)</h5>
+                        This event <span style="font-weight: 600">("auth-error")</span> has to be listened, when the
+                        user does not have valid auth token to do some tasks. So that it will show proper message to
+                        user.<br>
+                    </div>
+
+                    <div id="emit" class="section scrollspy"></div>
+                    <h4>Events to emit</h4>
+
+                    <div id="set-user" class="section scrollspy">
+                        <h5>set-user event</h5>
+                        This event <span style="font-weight: 600">("set-user")</span> has to be emitted when a user
+                        comes online.<br>
+                        User can only be set as online only after verification of authentication token. Which you have
+                        pass here.
+                        The following data has to be emitted<br>
+                        authentication token
+                    </div>
+                    <div id="notify-updates" class="section scrollspy">
+                        <h5>notification event</h5>
+                        This event <span style="font-weight: 600">("notification")</span> has to be emitted to share
+                        the update message from one user to other users<br>
+                        The following data has to be emitted<br>
+                        <pre>                           {
+                                userId: 'unique id of user',
+                                message: 'message for user',
+                                
+                            }
+                        </pre>
+                    </div>
+                    <div id="disconnect-emit" class="section scrollspy">
+                        <h5>disconnect event</h5>
+                        This event <span style="font-weight: 600">("disconnect")</span> has to be emitted when a user
+                        disconnected or logged off from system<br>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+    <footer style="background-color: black; min-height: 3em">
+        <center style="color: white; margin: auto; padding-top: 1em;">Copyright ©<span>2018</span> Lets-Do App - Faisal Khan</center>
+    </footer>
+    <!--  Scripts-->
+    <script src="./Events_files/jquery-2.1.1.min.js.download"></script>
+    <script src="./Events_files/materialize.min.js.download"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.scrollspy').scrollSpy();
+        });
+    </script>
+    <script>
+        (function ($) {
+            $(function () {
+
+                $('.button-collapse').sideNav();
+
+            }); // end of document ready
+        })(jQuery); // end of jQuery name space
+    </script>
+
+
+
+    <div class="hiddendiv common"> </div>
+    <div class="drag-target" data-sidenav="nav-mobile" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+    </div>
+</body>
+
+</html>
